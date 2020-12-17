@@ -1,11 +1,115 @@
-<input type ="text" placeholder="?">
-<button onclick="">Guess</button>
-<div id="hist">50 25 38</div>
-<div id="result">มากไป</div>
-<button onclick="">Staet Over</button>
-<script>
-    rn = Math.floor(Math.random()*100);
-    //alert(rn);
-    function guess();
-    
-</script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>สุ่มตัวเลข</title>
+
+    <style>
+      body {
+          background-image: url("https://wallpapercave.com/wp/wp7445967.jpg");
+      }
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+
+      .lastResult {
+        color: rgb(255, 255, 255);
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <font color="white"><h1>สุ่มตัวเลข</h1></font>
+
+    <div class="form">
+      <label for="guessField"></label><input type="text" id="guessField" class="guessField">
+      <input type="submit" value="คำตอบ" class="guessSubmit">
+    </div>
+
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+
+    <script>
+      let randomNumber = Math.floor(Math.random() * 100) + 1;
+      const guesses = document.querySelector('.guesses');
+      const lastResult = document.querySelector('.lastResult');
+      const lowOrHi = document.querySelector('.lowOrHi');
+      const guessSubmit = document.querySelector('.guessSubmit');
+      const guessField = document.querySelector('.guessField');
+      let guessCount = 1;
+      let resetButton;
+
+      function checkGuess() {
+        let userGuess = Number(guessField.value);
+        if (guessCount === 1) {
+          guesses.textContent = 'คำตอบก่อนหน้านี้: ';
+          guesses.style.backgroundColor = 'white';
+        }
+
+        guesses.textContent += userGuess + ' ';
+
+        if (userGuess === randomNumber) {
+          lastResult.textContent = 'คำตอบของคุณถูกต้อง';
+          lastResult.style.backgroundColor = 'green';
+          lowOrHi.textContent = '';
+          setGameOver();
+        } else if (guessCount === 10) {
+          lastResult.textContent = '!!!จบเกม!!!';
+          lowOrHi.textContent = '';
+          setGameOver();
+        } else {
+          if(userGuess < randomNumber) {
+            lastResult.textContent = 'น้อยไปนะ' ;
+            lastResult.style.backgroundColor = 'red';
+          } else if(userGuess > randomNumber) {
+            lastResult.textContent = 'มากไปนะ';
+            lastResult.style.backgroundColor = 'red';
+          }
+        }
+
+        guessCount++;
+        guessField.value = '';
+        guessField.focus();
+      }
+
+      guessSubmit.addEventListener('click', checkGuess);
+
+      function setGameOver() {
+        guessField.disabled = true;
+        guessSubmit.disabled = true;
+        resetButton = document.createElement('button');
+        resetButton.textContent = 'เริ่มเกมใหม่';
+        document.body.appendChild(resetButton);
+        resetButton.addEventListener('click', resetGame);
+      }
+
+      function resetGame() {
+        guessCount = 1;
+        const resetParas = document.querySelectorAll('.resultParas p');
+        for(let i = 0 ; i < resetParas.length ; i++) {
+          resetParas[i].textContent = '';
+        }
+
+        resetButton.parentNode.removeChild(resetButton);
+        guessField.disabled = false;
+        guessSubmit.disabled = false;
+        guessField.value = '';
+        guessField.focus();
+        lastResult.style.backgroundColor = 'white';
+        randomNumber = Math.floor(Math.random() * 100) + 1;
+      }
+    </script>
+  </body>
+</html>
