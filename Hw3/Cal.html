@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculate</title>
+    <script>
+        function cal(){
+            num1 = document.getElementById('num1');
+            num2 = document.getElementById('num2');
+            sum = document.getElementById('sum');
+            sign = document.getElementById('sign');
+            if(parseInt(sign.value)==1){
+                sum.innerHTML = parseInt(num1.value) + parseInt(num2.value)
+            }
+            if(parseInt(sign.value)==2){
+                sum.innerHTML = parseInt(num1.value) - parseInt(num2.value)
+            }
+            if(parseInt(sign.value)==3){
+                sum.innerHTML = parseInt(num1.value) * parseInt(num2.value)
+            }
+            if(parseInt(sign.value)==4){
+                sum.innerHTML = parseInt(num1.value) / parseInt(num2.value)
+            }
+        }
+    </script>
+</head>
+<body align = "center">
+    <input type ="text" id="num1">
+    <select name ="symbol" id="sign">
+        <option value="0">--Select symbol--</option>
+        <option value="1">+</option>
+        <option value="2">-</option>
+        <option value="3">*</option>
+        <option value="4">/</option>
+    </select>
+    <input type ="text" id="num2">
+    <button onclick="cal()">คำตอบ</button>
+    <div id ="sum"></div>
+    
+</body>
+</html>

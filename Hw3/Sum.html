@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <script>
+        function summary(){
+            sum = document.getElementById('sum').innerHTML=" "
+            num1 = document.getElementById('num1');
+            num2 = document.getElementById('num2');
+            sum = document.getElementById('sum');
+            var s = 0;
+            for(i = parseInt(num1.value);i<=parseInt(num2.value); i++ ){
+                s = s + i;
+                sum.innerHTML += i
+                if(i<parseInt(num2.value)){
+                    sum.innerHTML += " + "
+                }
+                if(i==parseInt(num2.value)){
+                    sum.innerHTML += " = "
+                    sum.innerHTML += s
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <input type="text" id = "num1">
+    <b> - </b>
+    <input type="text" id = "num2">
+    <button onclick="summary()">Summary</button>
+    <div id = "sum"></div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>random</title>
+    <script>
+        function random() {
+            let x = document.querySelector('#x')
+            let result = document.querySelector('#result')
+
+            result.innerHTML = ''
+
+            let numbers = []
+            for (let i = 0; i < parseInt(x.value); i++) {
+                rn = Math.floor(Math.random() * 100)
+                numbers.push(rn)
+            }
+
+            numbers.sort((a, b) => a - b)
+
+            console.log(numbers)
+
+            let count = 1
+            let table = ``
+
+            for (let i = 1; i <= numbers.length; i++) {
+                if (numbers[i] == numbers[i - 1]) {
+                    count++
+                }
+                else {
+                    table += `<tr>
+                                <td>${numbers[i - 1]}</td>
+                                <td>${count}</td>
+                            </tr>`
+                    count = 1
+                }
+            }
+
+            result.innerHTML = table
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" placeholder="ใส่ตัวเลขที่ต้องการ" id="x">
+    <button onclick="random()">สุ่ม</button>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ตัวเลขที่ได้</th>
+                <th>จำนวนที่ถูกสุ่มซ้ำ</th>
+            </tr>
+        </thead>
+
+        <tbody id="result">
+
+        </tbody>
+    </table>
+</body>
+
+</html>
